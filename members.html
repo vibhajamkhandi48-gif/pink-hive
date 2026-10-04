@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pink Hive - Members</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff5f9;
+        }
+
+        .topbar {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e75480;
+        }
+
+        .back {
+            color: #e75480;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #e75480;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .add-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .add-box input {
+            padding: 13px;
+            width: 65%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .add-box button {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #e75480;
+            color: white;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .member-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .avatar {
+            width: 65px;
+            height: 65px;
+            margin: auto;
+            border-radius: 50%;
+            background: #ffd6e7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .member-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .role {
+            color: #e75480;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #e75480;
+            font-weight: bold;
+            padding: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="topbar">
+
+        <div class="logo">
+            🐝 Pink Hive
+        </div>
+
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <h1>👥 Hive Members</h1>
+
+        <p class="subtitle">
+            Manage the people in your Pink Hive 💗
+        </p>
+
+
+        <div class="add-box">
+
+            <h3>Add a new member</h3>
+
+            <input
+                type="email"
+                id="memberEmail"
+                placeholder="Enter member email"
+            >
+
+            <button onclick="addMember()">
+                Add Member +
+            </button>
+
+        </div>
+
+
+        <div class="members-grid" id="membersGrid">
+
+            <div class="loading">
+                🐝 Loading Hive members...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* LOAD MEMBERS FROM BACKEND */
+
+        async function loadMembers() {
+
+            try {
+
+                const response =
+                    await fetch("http://localhost:5000/api/team");
+
+                const members =
+                    await response.json();
+
+                const grid =
+                    document.getElementById("membersGrid");
+
+                grid.innerHTML = "";
+
+
+                members.forEach((member, index) => {
+
+                    const avatars = [
+                        "👩🏻",
+                        "👩🏼",
+                        "👩🏽",
+                        "👩🏾",
+                        "👩🏿"
+                    ];
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "member-card";
+
+                    card.innerHTML = `
+
+                        <div class="avatar">
+                            ${avatars[index % avatars.length]}
+                        </div>
+
+                        <h3>
+                            ${member.name}
+                        </h3>
+
+                        <div class="role">
+                            ${member.role}
+                        </div>
+
+                    `;
+
+                    grid.appendChild(card);
+
+                });
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById("membersGrid").innerHTML = `
+
+                    <div class="loading">
+
+                        ❌ Could not load team members.
+
+                        <br><br>
+
+                        Make sure the Pink Hive backend is running.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ADD MEMBER */
+
+        function addMember() {
+
+            const email =
+                document.getElementById("memberEmail").value.trim();
+
+            if (!email) {
+
+                alert("Please enter an email address 💗");
+
+                return;
+
+            }
+
+            alert(
+                "Invitation sent to " +
+                email +
+                " 🐝💗"
+            );
+
+            document.getElementById("memberEmail").value = "";
+
+        }
+
+
+        /* LOAD MEMBERS WHEN PAGE OPENS */
+
+        loadMembers();
+
+    </script>
+
+</body>
+
+</html>

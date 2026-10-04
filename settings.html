@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pink Hive - Settings</title>
+
+<style>
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff5f9;
+    }
+
+    .topbar {
+        background: white;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+        color: #e75480;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .back {
+        color: #e75480;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 40px;
+    }
+
+    h1 {
+        color: #e75480;
+    }
+
+    .setting-card {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .setting {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .setting:last-child {
+        border-bottom: none;
+    }
+
+    .setting span {
+        color: #555;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #e75480;
+        color: white;
+        cursor: pointer;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="topbar">
+
+    <div class="logo">
+        🐝 Pink Hive
+    </div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
+
+</div>
+
+
+<div class="container">
+
+    <h1>⚙️ Settings</h1>
+
+    <p>
+        Customize your Pink Hive experience 💗
+    </p>
+
+
+    <div class="setting-card">
+
+        <h2>👤 Profile</h2>
+
+        <div class="setting">
+
+            <span>Name</span>
+
+            <input
+                type="text"
+                value="Pink Hive User"
+            >
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>Email</span>
+
+            <input
+                type="email"
+                value="user@example.com"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="setting-card">
+
+        <h2>🔔 Notifications</h2>
+
+        <div class="setting">
+
+            <span>Task notifications</span>
+
+            <input type="checkbox" checked>
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>Meeting reminders</span>
+
+            <input type="checkbox" checked>
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>Chat notifications</span>
+
+            <input type="checkbox">
+
+        </div>
+
+    </div>
+
+
+    <div class="setting-card">
+
+        <h2>🔒 Account</h2>
+
+        <button onclick="saveSettings()">
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function saveSettings() {
+
+        alert(
+            "Your settings have been saved! 🐝💗"
+        );
+
+    }
+
+</script>
+```
+
+</body>
+
+</html>

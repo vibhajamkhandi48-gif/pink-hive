@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Pink Hive - Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        width: 380px;
+        background: white;
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 42px;
+        margin-bottom: 5px;
+    }
+
+    h1 {
+        color: #e75480;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #777;
+        margin-bottom: 30px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 12px;
+        background: #e75480;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    .signup-text {
+        margin-top: 25px;
+        color: #777;
+    }
+
+    .signup-text a {
+        color: #e75480;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .back {
+        display: block;
+        margin-top: 20px;
+        color: #888;
+        text-decoration: none;
+        font-size: 14px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+```
+<div class="logo">🐝💗</div>
+
+<h1>Welcome Back!</h1>
+
+<p class="subtitle">
+    Enter your Hive and get things done ✨
+</p>
+
+<form onsubmit="loginUser(event)">
+
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email address"
+        required
+    >
+
+    <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+        required
+    >
+
+    <button type="submit">
+        Login 🐝
+    </button>
+
+</form>
+
+<p class="signup-text">
+    Don't have an account?
+    <a href="signup.html">Create one</a>
+</p>
+
+<a href="index.html" class="back">
+    ← Back to Pink Hive
+</a>
+```
+
+</div>
+
+<script>
+    function loginUser(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("loginEmail").value.trim();
+
+        const password =
+            document.getElementById("loginPassword").value;
+
+        if (email && password) {
+
+            // Save login status
+            localStorage.setItem("pinkHiveLoggedIn", "true");
+
+            // Save the logged-in email
+            localStorage.setItem("pinkHiveUserEmail", email);
+
+            alert("Welcome back to Pink Hive! 🐝💗");
+
+            // Open dashboard
+            window.location.href = "dashboard.html";
+        }
+    }
+</script>
+
+</body>
+</html>

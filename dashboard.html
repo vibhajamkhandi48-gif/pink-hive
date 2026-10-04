@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pink Hive | Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+            background: #fff8fc;
+        }
+
+        .dashboard-page {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 240px;
+            min-height: 100vh;
+            background: white;
+            border-right: 1px solid #f3dce7;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .side-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-left: 10px;
+        }
+
+        .side-logo span {
+            color: #e94d91;
+        }
+
+        .side-logo-icon {
+            width: 38px;
+            height: 38px;
+            background: #ffe3ef;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-title {
+            font-size: 10px;
+            color: #b596a6;
+            margin: 15px 10px 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .side-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .side-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #755c6b;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: left;
+            transition: .3s;
+        }
+
+        .side-menu button:hover,
+        .side-menu button.active {
+            background: #ffe8f2;
+            color: #df478b;
+        }
+
+        /* MAIN */
+
+        .dashboard-main {
+            margin-left: 240px;
+            width: calc(100% - 240px);
+            padding: 35px 45px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .dashboard-header small {
+            color: #bd94a8;
+            font-size: 11px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 30px;
+            margin-top: 3px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .notification {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #f0d9e5;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .dashboard-profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ffddeb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* WELCOME */
+
+        .welcome-card {
+            padding: 30px;
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe4ef,
+                    #f5e7ff
+                );
+
+            border: 1px solid #f3d9e7;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .welcome-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card p {
+            color: #806879;
+            font-size: 13px;
+        }
+
+        .welcome-bee {
+            font-size: 70px;
+            animation: beeFloat 3s infinite ease-in-out;
+        }
+
+        @keyframes beeFloat {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+        }
+
+        /* STATS */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #f2dfe8;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .stat-pink {
+            background: #ffe1ed;
+        }
+
+        .stat-purple {
+            background: #eee3ff;
+        }
+
+        .stat-yellow {
+            background: #fff1c9;
+        }
+
+        .stat-peach {
+            background: #ffe7da;
+        }
+
+        .stat-card small {
+            display: block;
+            color: #a18796;
+            font-size: 10px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        /* CONTENT GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #f2dfe8;
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading h3 {
+            font-size: 16px;
+        }
+
+        .panel-heading button {
+            border: none;
+            background: none;
+            color: #df4b8c;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        /* TASKS */
+
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #f6e9ef;
+        }
+
+        .task:last-child {
+            border-bottom: none;
+        }
+
+        .task-check {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #e8abc5;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .task-info small {
+            color: #aa91a0;
+            font-size: 9px;
+        }
+
+        .priority {
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 8px;
+            background: #ffe2ec;
+            color: #d94786;
+        }
+
+        /* ACTIVITY */
+
+        .activity-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f6e9ef;
+        }
+
+        .activity-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #f4ddff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-info strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .activity-info small {
+            color: #aa91a0;
+            font-size: 9px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .side-logo span,
+            .menu-title,
+            .side-menu button span {
+                display: none;
+            }
+
+            .side-logo {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .side-menu button {
+                justify-content: center;
+            }
+
+            .dashboard-main {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+                padding: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media(max-width: 650px) {
+
+            .dashboard-main {
+                padding: 20px 15px;
+            }
+
+            .welcome-card {
+                padding: 22px;
+            }
+
+            .welcome-bee {
+                font-size: 50px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="dashboard-page">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="side-logo">
+
+            <div class="side-logo-icon">
+                🐝
+            </div>
+
+            <div>
+                Pink <span>Hive</span>
+            </div>
+
+        </div>
+
+
+        <div class="menu-title">
+            Workspace
+        </div>
+
+
+        <div class="side-menu">
+
+            <button class="active" onclick="window.location.href='dashboard.html'">
+                🏠
+                <span>Dashboard</span>
+            </button>
+
+            <button onclick="window.location.href='chat.html'">
+                💬
+                <span>Team Chat</span>
+            </button>
+
+            <button onclick="window.location.href='tasks.html'">
+                📋
+                <span>Tasks</span>
+            </button>
+
+            <button onclick="window.location.href='meetings.html'">
+                🎥
+                <span>Meetings</span>
+            </button>
+
+            <button onclick="window.location.href='hivehelp.html'">
+                🤖
+                <span>HiveHelp</span>
+            </button>
+
+            <button onclick="window.location.href='members.html'">
+                👥
+                <span>Members</span>
+            </button>
+
+        </div>
+
+
+        <div class="menu-title">
+            Settings
+        </div>
+
+
+        <div class="side-menu">
+
+            <button onclick="window.location.href='settings.html'">
+                ⚙️
+                <span>Settings</span>
+            </button>
+
+            <button onclick="window.location.href='index.html'">
+                🚪
+                <span>Back to Home</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <small>
+                    SUNDAY · OCTOBER 4, 2026
+                </small>
+
+                <h1>
+                    Good morning! 🌸
+                </h1>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="notification"
+                    onclick="showNotification()">
+                    🔔
+                </button>
+
+                <div class="dashboard-profile">
+                    👩🏻
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome-card">
+
+            <div>
+
+                <h2>
+                    Welcome to your Hive! 🐝
+                </h2>
+
+                <p>
+                    Everything your team needs is right here.
+                    Let's make today productive!
+                </p>
+
+            </div>
+
+            <div class="welcome-bee">
+                🐝
+            </div>
+
+        </div>
+
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon stat-pink">
+                    📋
+                </div>
+
+                <div>
+
+                    <small>
+                        Active Tasks
+                    </small>
+
+                    <strong>
+                        12
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon stat-purple">
+                    💬
+                </div>
+
+                <div>
+
+                    <small>
+                        Messages
+                    </small>
+
+                    <strong>
+                        24
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon stat-yellow">
+                    👥
+                </div>
+
+                <div>
+
+                    <small>
+                        Team Members
+                    </small>
+
+                    <strong>
+                        18
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon stat-peach">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <small>
+                        Progress
+                    </small>
+
+                    <strong>
+                        87%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONTENT -->
+
+        <div class="content-grid">
+
+
+            <!-- TASKS -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <h3>
+                        📋 Today's Tasks
+                    </h3>
+
+                    <button onclick="addTask()">
+                        + Add task
+                    </button>
+
+                </div>
+
+
+                <div class="task">
+
+                    <button
+                        class="task-check"
+                        onclick="completeTask(this)">
+                    </button>
+
+                    <div class="task-info">
+
+                        <strong>
+                            Finish homepage design
+                        </strong>
+
+                        <small>
+                            Due today
+                        </small>
+
+                    </div>
+
+                    <span class="priority">
+                        High
+                    </span>
+
+                </div>
+
+
+                <div class="task">
+
+                    <button
+                        class="task-check"
+                        onclick="completeTask(this)">
+                    </button>
+
+                    <div class="task-info">
+
+                        <strong>
+                            Team meeting preparation
+                        </strong>
+
+                        <small>
+                            Due today
+                        </small>
+
+                    </div>
+
+                    <span class="priority">
+                        Medium
+                    </span>
+
+                </div>
+
+
+                <div class="task">
+
+                    <button
+                        class="task-check"
+                        onclick="completeTask(this)">
+                    </button>
+
+                    <div class="task-info">
+
+                        <strong>
+                            Update project documentation
+                        </strong>
+
+                        <small>
+                            Due tomorrow
+                        </small>
+
+                    </div>
+
+                    <span class="priority">
+                        Low
+                    </span>
+
+                </div>
+
+
+                <div class="task">
+
+                    <button
+                        class="task-check"
+                        onclick="completeTask(this)">
+                    </button>
+
+                    <div class="task-info">
+
+                        <strong>
+                            Review team submissions
+                        </strong>
+
+                        <small>
+                            Due tomorrow
+                        </small>
+
+                    </div>
+
+                    <span class="priority">
+                        Medium
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIVITY -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <h3>
+                        ✨ Recent Activity
+                    </h3>
+
+                    <button>
+                        View all
+                    </button>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-avatar">
+                        A
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            Ananya completed a task
+                        </strong>
+
+                        <small>
+                            5 minutes ago
+                        </small>
+
+                    </div>
+
+                    ✓
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-avatar">
+                        R
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            Rahul joined the Hive
+                        </strong>
+
+                        <small>
+                            18 minutes ago
+                        </small>
+
+                    </div>
+
+                    💗
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-avatar">
+                        S
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            Sneha added a new task
+                        </strong>
+
+                        <small>
+                            32 minutes ago
+                        </small>
+
+                    </div>
+
+                    📋
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-avatar">
+                        V
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            You joined a meeting
+                        </strong>
+
+                        <small>
+                            1 hour ago
+                        </small>
+
+                    </div>
+
+                    🎥
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- HIVEHELP -->
+
+<button
+    class="chat-button"
+    onclick="openChat()">
+    🤖
+</button>
+
+
+<div class="chat-box" id="chatBox">
+
+    <div class="chat-header">
+
+        <div>
+
+            🤖 <b>HiveHelp</b>
+
+            <small>
+                Your AI assistant
+            </small>
+
+        </div>
+
+        <button onclick="closeChat()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="chat-messages"
+        id="chatMessages">
+
+        <div class="bot-message">
+
+            Hey! 🐝💗 I'm HiveHelp.
+            What can I help you with?
+
+        </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+        <input
+            id="chatInput"
+            placeholder="Ask HiveHelp..."
+            onkeydown="handleChat(event)"
+        >
+
+        <button onclick="sendMessage()">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+    function selectMenu(button) {
+
+        document
+            .querySelectorAll(".side-menu button")
+            .forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+        button.classList.add("active");
+
+        alert(
+            button.innerText.trim() +
+            " section is coming next! 🐝💗"
+        );
+    }
+
+
+    function completeTask(button) {
+
+        const task =
+            button.parentElement;
+
+        const title =
+            task.querySelector("strong");
+
+        title.style.textDecoration =
+            "line-through";
+
+        title.style.opacity =
+            "0.5";
+
+        button.innerText = "✓";
+
+        button.style.background =
+            "#ffe0ed";
+
+        button.style.color =
+            "#df4b8c";
+
+    }
+
+
+    function addTask() {
+
+        const task =
+            prompt("Enter your new task:");
+
+        if (task) {
+
+            alert(
+                "Task added! 📋💗\n\n" +
+                task
+            );
+
+        }
+
+    }
+
+
+    function showNotification() {
+
+        alert(
+            "🔔 You have 3 new notifications!"
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>

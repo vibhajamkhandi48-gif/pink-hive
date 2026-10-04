@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meetings | Pink Hive</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff0f7, #ffe4f0);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            height: 70px;
+            background: #ff69a8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 4px 15px rgba(255, 105, 168, 0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 18px;
+            border-radius: 20px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            color: #e83e8c;
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+        /* MEETING CARD */
+
+        .meeting-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 105, 168, 0.15);
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .meeting-icon {
+            width: 80px;
+            height: 80px;
+            background: #ffe1ee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+
+        .meeting-card h2 {
+            color: #e83e8c;
+            margin-bottom: 10px;
+        }
+
+        .meeting-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            color: #666;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            background: #fff4f8;
+            padding: 12px 20px;
+            border-radius: 15px;
+        }
+
+        /* BUTTON */
+
+        .start-btn {
+            border: none;
+            background: linear-gradient(135deg, #ff69a8, #ff4f91);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 79, 145, 0.3);
+        }
+
+        /* MEETING ROOM */
+
+        .meeting-room {
+            display: none;
+            margin-top: 30px;
+            background: #1d1d1d;
+            border-radius: 25px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .meeting-room.active {
+            display: block;
+        }
+
+        .meeting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .live-status {
+            background: #ff3b6b;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .meeting-status {
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        /* VIDEO */
+
+        .video-container {
+            width: 100%;
+            height: 450px;
+            background: #222;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #222;
+        }
+
+        /* CAMERA OFF */
+
+        .video-off {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: #252525;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .video-off.active {
+            display: flex;
+        }
+
+        .video-off-icon {
+            font-size: 55px;
+        }
+
+        /* CONTROLS */
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            background: #444;
+            color: white;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .control-btn:hover {
+            background: #555;
+        }
+
+        .end-btn {
+            background: #ff3b6b;
+        }
+
+        .end-btn:hover {
+            background: #e52e5c;
+        }
+
+        /* PARTICIPANTS */
+
+        .participants {
+            margin-top: 25px;
+            background: #292929;
+            padding: 18px;
+            border-radius: 18px;
+        }
+
+        .participants h3 {
+            margin-bottom: 12px;
+            color: #ff8fbd;
+        }
+
+        .participant-list {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .participant {
+            background: #3a3a3a;
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* SCREEN SHARE */
+
+        .screen-share-info {
+            margin-top: 12px;
+            text-align: center;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+            .meeting-card {
+                padding: 22px;
+            }
+
+            .video-container {
+                height: 300px;
+            }
+
+            .meeting-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="logo">
+            🐝 Pink Hive
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+        <div class="page-title">
+            <h1>🎥 Hive Meetings</h1>
+            <p>Connect, collaborate and grow together 💗</p>
+        </div>
+
+
+        <!-- MEETING CARD -->
+
+        <div class="meeting-card">
+
+            <div class="meeting-icon">
+                🎥
+            </div>
+
+            <h2>Team Meeting</h2>
+
+            <p>
+                Start a virtual meeting with your Hive members.
+            </p>
+
+            <div class="meeting-info">
+
+                <div class="info-box">
+                    📅 Today
+                </div>
+
+                <div class="info-box">
+                    ⏰ 3:00 PM
+                </div>
+
+                <div class="info-box">
+                    👥 6 Participants
+                </div>
+
+            </div>
+
+            <button class="start-btn" onclick="startMeeting()">
+                🚀 Start Meeting
+            </button>
+
+        </div>
+
+
+        <!-- MEETING ROOM -->
+
+        <div class="meeting-room" id="meetingRoom">
+
+            <div class="meeting-header">
+
+                <div>
+                    <h2>🐝 Pink Hive Meeting</h2>
+                    <p class="meeting-status" id="meetingStatus">
+                        Preparing meeting...
+                    </p>
+                </div>
+
+                <div class="live-status">
+                    🔴 LIVE
+                </div>
+
+            </div>
+
+
+            <!-- VIDEO -->
+
+            <div class="video-container">
+
+                <video
+                    id="localVideo"
+                    autoplay
+                    muted
+                    playsinline>
+                </video>
+
+                <div class="video-off" id="videoOff">
+
+                    <div class="video-off-icon">
+                        📷
+                    </div>
+
+                    <div>
+                        Camera is OFF
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="screen-share-info">
+                Your camera preview is shown here. Screen sharing can be started using the button below.
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <button
+                    class="control-btn"
+                    id="cameraButton"
+                    onclick="toggleCamera()">
+                    📷 Camera ON
+                </button>
+
+                <button
+                    class="control-btn"
+                    id="micButton"
+                    onclick="toggleMicrophone()">
+                    🎤 Mic ON
+                </button>
+
+                <button
+                    class="control-btn"
+                    onclick="shareScreen()">
+                    🖥️ Share Screen
+                </button>
+
+                <button
+                    class="control-btn end-btn"
+                    onclick="endMeeting()">
+                    📞 End Meeting
+                </button>
+
+            </div>
+
+
+            <!-- PARTICIPANTS -->
+
+            <div class="participants">
+
+                <h3>👥 Participants</h3>
+
+                <div class="participant-list">
+
+                    <div class="participant">
+                        🐝 You
+                    </div>
+
+                    <div class="participant">
+                        🌸 Ananya
+                    </div>
+
+                    <div class="participant">
+                        🦋 Riya
+                    </div>
+
+                    <div class="participant">
+                        🌷 Sneha
+                    </div>
+
+                    <div class="participant">
+                        🐝 Priya
+                    </div>
+
+                    <div class="participant">
+                        🌺 Aisha
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        let localStream = null;
+
+        let cameraEnabled = true;
+        let microphoneEnabled = true;
+
+
+        /* START MEETING */
+
+        async function startMeeting() {
+
+            const meetingRoom =
+                document.getElementById("meetingRoom");
+
+            const video =
+                document.getElementById("localVideo");
+
+            const status =
+                document.getElementById("meetingStatus");
+
+            meetingRoom.classList.add("active");
+
+            try {
+
+                localStream =
+                    await navigator.mediaDevices.getUserMedia({
+                        video: true,
+                        audio: true
+                    });
+
+                video.srcObject = localStream;
+
+                cameraEnabled = true;
+                microphoneEnabled = true;
+
+                document
+                    .getElementById("videoOff")
+                    .classList.remove("active");
+
+                document
+                    .getElementById("cameraButton")
+                    .innerText = "📷 Camera ON";
+
+                document
+                    .getElementById("micButton")
+                    .innerText = "🎤 Mic ON";
+
+                status.innerText =
+                    "🎥 Camera and 🎤 microphone are ready!";
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                status.innerText =
+                    "⚠️ Camera or microphone permission was denied.";
+
+                alert(
+                    "Please allow camera and microphone permissions in your browser to use the meeting."
+                );
+
+            }
+
+        }
+
+
+        /* CAMERA ON / OFF */
+
+        function toggleCamera() {
+
+            if (!localStream) {
+                return;
+            }
+
+            const videoTrack =
+                localStream.getVideoTracks()[0];
+
+            const videoOff =
+                document.getElementById("videoOff");
+
+            const cameraButton =
+                document.getElementById("cameraButton");
+
+            cameraEnabled =
+                !cameraEnabled;
+
+            videoTrack.enabled =
+                cameraEnabled;
+
+
+            if (cameraEnabled) {
+
+                videoOff.classList.remove("active");
+
+                cameraButton.innerText =
+                    "📷 Camera ON";
+
+            }
+
+            else {
+
+                videoOff.classList.add("active");
+
+                cameraButton.innerText =
+                    "📷 Camera OFF";
+
+            }
+
+        }
+
+
+        /* MICROPHONE ON / OFF */
+
+        function toggleMicrophone() {
+
+            if (!localStream) {
+                return;
+            }
+
+            const audioTrack =
+                localStream.getAudioTracks()[0];
+
+            const micButton =
+                document.getElementById("micButton");
+
+            microphoneEnabled =
+                !microphoneEnabled;
+
+            audioTrack.enabled =
+                microphoneEnabled;
+
+
+            if (microphoneEnabled) {
+
+                micButton.innerText =
+                    "🎤 Mic ON";
+
+            }
+
+            else {
+
+                micButton.innerText =
+                    "🔇 Mic OFF";
+
+            }
+
+        }
+
+
+        /* SCREEN SHARE */
+
+        async function shareScreen() {
+
+            try {
+
+                const screenStream =
+                    await navigator.mediaDevices.getDisplayMedia({
+                        video: true
+                    });
+
+                const screenTrack =
+                    screenStream.getVideoTracks()[0];
+
+                const video =
+                    document.getElementById("localVideo");
+
+                /*
+                    Remove camera mirror if it was ever added.
+                    Screen share should always appear normally.
+                */
+
+                video.style.transform = "none";
+
+                video.srcObject =
+                    screenStream;
+
+
+                screenTrack.onended = function () {
+
+                    if (localStream) {
+
+                        video.srcObject =
+                            localStream;
+
+                        video.style.transform =
+                            "none";
+
+                    }
+
+                };
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    "Screen sharing cancelled."
+                );
+
+            }
+
+        }
+
+
+        /* END MEETING */
+
+        function endMeeting() {
+
+            if (localStream) {
+
+                localStream
+                    .getTracks()
+                    .forEach(track => track.stop());
+
+                localStream = null;
+
+            }
+
+            const video =
+                document.getElementById("localVideo");
+
+            video.srcObject = null;
+
+            video.style.transform = "none";
+
+
+            document
+                .getElementById("meetingRoom")
+                .classList.remove("active");
+
+
+            document
+                .getElementById("videoOff")
+                .classList.remove("active");
+
+
+            document
+                .getElementById("cameraButton")
+                .innerText =
+                "📷 Camera ON";
+
+
+            document
+                .getElementById("micButton")
+                .innerText =
+                "🎤 Mic ON";
+
+
+            cameraEnabled = true;
+            microphoneEnabled = true;
+
+
+            alert(
+                "Meeting ended. 🐝💗"
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

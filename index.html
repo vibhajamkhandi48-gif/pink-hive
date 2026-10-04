@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Hive | Collaborate & Grow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background decorations -->
+    <div class="floating flower flower1">✿</div>
+    <div class="floating flower flower2">✿</div>
+    <div class="floating heart heart1">♡</div>
+    <div class="floating heart heart2">♡</div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🐝</div>
+            <span>Pink <b>Hive</b></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#teams">Teams</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button class="login-btn" onclick="openLogin()">
+            Login
+        </button>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✨ Built for modern teams
+            </div>
+
+            <h1>
+                Where teams
+                <span>create,</span>
+                <br>
+                collaborate &
+                <span>grow.</span>
+            </h1>
+
+            <p>
+                A beautiful workspace where your team can communicate,
+                manage projects, solve problems and grow together.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn" onclick="startWorkspace()">
+                    Start your Hive →
+                </button>
+
+                <button class="secondary-btn" onclick="scrollToFeatures()">
+                    Explore features
+                </button>
+
+            </div>
+
+            <div class="small-text">
+                💗 Free to get started · No credit card required
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD PREVIEW -->
+        <div class="dashboard-card">
+
+            <div class="dashboard-top">
+
+                <div>
+                    <small>GOOD MORNING ✨</small>
+                    <h3>Welcome back, Hive!</h3>
+                </div>
+
+                <div class="profile">
+                    👩🏻
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="mini-card">
+
+                    <div class="mini-icon pink">
+                        💬
+                    </div>
+
+                    <div>
+                        <small>Messages</small>
+                        <strong>24</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <div class="mini-icon purple">
+                        📋
+                    </div>
+
+                    <div>
+                        <small>Tasks</small>
+                        <strong>12</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <div class="mini-icon peach">
+                        👥
+                    </div>
+
+                    <div>
+                        <small>Members</small>
+                        <strong>18</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <div class="mini-icon yellow">
+                        ⭐
+                    </div>
+
+                    <div>
+                        <small>Progress</small>
+                        <strong>87%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-title">
+                    <b>Recent activity</b>
+                    <span>View all</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="avatar">A</div>
+
+                    <div>
+                        <b>Ananya completed a task</b>
+                        <small>5 minutes ago</small>
+                    </div>
+
+                    <span>✓</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="avatar">R</div>
+
+                    <div>
+                        <b>Rahul joined the Hive</b>
+                        <small>18 minutes ago</small>
+                    </div>
+
+                    <span>💗</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+
+        <div class="section-heading">
+
+            <div class="badge">
+                🌸 Everything your Hive needs
+            </div>
+
+            <h2>
+                One space.
+                <span>Endless possibilities.</span>
+            </h2>
+
+            <p>
+                Everything your team needs to communicate,
+                collaborate and get things done.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon pink-icon">
+                    💬
+                </div>
+
+                <h3>Team Chat</h3>
+
+                <p>
+                    Keep conversations organized and
+                    stay connected with your team.
+                </p>
+
+                <button onclick="showFeature('Team Chat')">
+                    Explore →
+                </button>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon purple-icon">
+                    🎥
+                </div>
+
+                <h3>Hive Meetings</h3>
+
+                <p>
+                    Meet your team through video and
+                    voice calls from anywhere.
+                </p>
+
+                <button onclick="startMeeting()">
+                    Start meeting →
+                </button>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon peach-icon">
+                    📋
+                </div>
+
+                <h3>Smart Tasks</h3>
+
+                <p>
+                    Organize tasks, deadlines and projects
+                    without the chaos.
+                </p>
+
+                <button onclick="showFeature('Smart Tasks')">
+                    Manage tasks →
+                </button>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon yellow-icon">
+                    🤖
+                </div>
+
+                <h3>HiveHelp AI</h3>
+
+                <p>
+                    Your AI assistant is always ready to
+                    help when you're stuck.
+                </p>
+
+                <button onclick="openChat()">
+                    Ask HiveHelp →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TEAM SECTION -->
+    <section class="team-section" id="teams">
+
+        <div class="team-text">
+
+            <div class="badge">
+                🐝 Your team's new home
+            </div>
+
+            <h2>
+                Work together.
+                <span>Better.</span>
+            </h2>
+
+            <p>
+                Bring your people, conversations, meetings
+                and projects together in one beautiful workspace.
+            </p>
+
+            <div class="check-list">
+
+                <div>✓ Simple team communication</div>
+                <div>✓ Video & voice meetings</div>
+                <div>✓ AI-powered assistance</div>
+                <div>✓ Smart project management</div>
+
+            </div>
+
+            <button class="primary-btn" onclick="startWorkspace()">
+                Create your Hive
+            </button>
+
+        </div>
+
+
+        <div class="team-visual">
+
+            <div class="hive-circle">
+                🐝
+            </div>
+
+            <div class="floating-card card-one">
+                💬 Team chat
+            </div>
+
+            <div class="floating-card card-two">
+                🎥 Meeting
+            </div>
+
+            <div class="floating-card card-three">
+                🤖 HiveHelp
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+
+        <div class="about-box">
+
+            <div class="about-icon">
+                💗
+            </div>
+
+            <h2>
+                Built with people in mind.
+            </h2>
+
+            <p>
+                Pink Hive brings your team's daily work into
+                one friendly, simple and productive space.
+            </p>
+
+            <button class="primary-btn" onclick="startWorkspace()">
+                Join the Hive 🐝
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🐝 Pink Hive
+        </div>
+
+        <p>
+            Where teams create, collaborate & grow.
+        </p>
+
+        <div class="footer-links">
+            <span>Privacy</span>
+            <span>Terms</span>
+            <span>Contact</span>
+        </div>
+
+        <small>
+            © 2026 Pink Hive. Made with 💗
+        </small>
+
+    </footer>
+
+
+    <!-- LOGIN MODAL -->
+    <div class="modal" id="loginModal">
+
+        <div class="modal-box">
+
+            <button class="close" onclick="closeLogin()">×</button>
+
+            <div class="modal-icon">🐝</div>
+
+            <h2>Welcome back!</h2>
+
+            <p>Enter your details to join your Hive.</p>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email address"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <button
+                class="primary-btn full"
+                onclick="login()"
+            >
+                Login
+            </button>
+
+            <p class="signup-text">
+                Don't have an account?
+                <b onclick="signup()">Create one</b>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- AI CHAT -->
+    <div class="chat-box" id="chatBox">
+
+        <div class="chat-header">
+
+            <div>
+                🤖 <b>HiveHelp</b>
+                <small>Your AI assistant</small>
+            </div>
+
+            <button onclick="closeChat()">×</button>
+
+        </div>
+
+
+        <div class="chat-messages" id="chatMessages">
+
+            <div class="bot-message">
+                Hey! 🐝 I'm HiveHelp.
+                What can I help you with?
+            </div>
+
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                id="chatInput"
+                placeholder="Ask HiveHelp..."
+                onkeydown="handleChat(event)"
+            >
+
+            <button onclick="sendMessage()">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CHAT BUTTON -->
+    <button class="chat-button" onclick="openChat()">
+        🤖
+    </button>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

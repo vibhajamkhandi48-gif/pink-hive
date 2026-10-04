@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Hive - Tasks</title>
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff5f9;
+    }
+
+    .topbar {
+        background: white;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #e75480;
+    }
+
+    .back {
+        color: #e75480;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px;
+    }
+
+    h1 {
+        color: #e75480;
+    }
+
+    .add-task {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+    }
+
+    input, select {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin: 5px;
+    }
+
+    input {
+        width: 45%;
+    }
+
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #e75480;
+        color: white;
+        cursor: pointer;
+    }
+
+    .task {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .task h3 {
+        margin: 0 0 7px;
+    }
+
+    .task small {
+        color: #777;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        opacity: 0.5;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="topbar">
+    <div class="logo">🐝 Pink Hive</div>
+    <a href="dashboard.html" class="back">← Dashboard</a>
+</div>
+
+<div class="container">
+
+    <h1>📋 Hive Tasks</h1>
+
+    <p>Organize your team's work and stay productive 💗</p>
+
+    <div class="add-task">
+
+        <h3>Add New Task</h3>
+
+        <input
+            type="text"
+            id="taskInput"
+            placeholder="Enter task name"
+        >
+
+        <select id="priority">
+            <option>High Priority</option>
+            <option>Medium Priority</option>
+            <option>Low Priority</option>
+        </select>
+
+        <button onclick="addTask()">
+            Add Task +
+        </button>
+
+    </div>
+
+    <div id="taskList">
+
+        <div class="task">
+
+            <div>
+                <h3>Complete project presentation</h3>
+                <small>High Priority • Due Today</small>
+            </div>
+
+            <button onclick="completeTask(this)">
+                Complete
+            </button>
+
+        </div>
+
+        <div class="task">
+
+            <div>
+                <h3>Design homepage</h3>
+                <small>Medium Priority • Due Tomorrow</small>
+            </div>
+
+            <button onclick="completeTask(this)">
+                Complete
+            </button>
+
+        </div>
+
+        <div class="task">
+
+            <div>
+                <h3>Test login system</h3>
+                <small>Low Priority • Due Friday</small>
+            </div>
+
+            <button onclick="completeTask(this)">
+                Complete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function addTask() {
+
+        const input =
+            document.getElementById("taskInput");
+
+        const priority =
+            document.getElementById("priority").value;
+
+        const taskName =
+            input.value.trim();
+
+        if (!taskName) {
+            alert("Please enter a task 💗");
+            return;
+        }
+
+        const task =
+            document.createElement("div");
+
+        task.className = "task";
+
+        task.innerHTML = `
+            <div>
+                <h3>${taskName}</h3>
+                <small>${priority}</small>
+            </div>
+
+            <button onclick="completeTask(this)">
+                Complete
+            </button>
+        `;
+
+        document
+            .getElementById("taskList")
+            .appendChild(task);
+
+        input.value = "";
+    }
+
+
+    function completeTask(button) {
+
+        const task =
+            button.parentElement;
+
+        task.classList.add("completed");
+
+        button.innerText = "✓ Done";
+
+    }
+
+</script>
+```
+
+</body>
+</html>

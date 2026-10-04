@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pink Hive - HiveHelp</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #fff5f9, #ffe5f0);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* TOP BAR */
+
+    .topbar {
+        background: white;
+        padding: 18px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+        color: #e75480;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .back {
+        color: #e75480;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+
+    /* CHAT CONTAINER */
+
+    .chat {
+        flex: 1;
+        max-width: 900px;
+        width: 92%;
+        height: calc(100vh - 110px);
+        margin: 20px auto;
+        background: white;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 10px 35px rgba(231,84,128,0.15);
+    }
+
+
+    /* CHAT HEADER */
+
+    .chat-header {
+        padding: 22px 25px;
+        background: linear-gradient(135deg, #ffd6e7, #ffe8f1);
+        border-bottom: 1px solid #ffd2e3;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .bot-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+    }
+
+    .chat-header h2 {
+        margin: 0;
+        color: #e75480;
+    }
+
+    .chat-header p {
+        margin: 5px 0 0;
+        color: #777;
+    }
+
+    .online {
+        margin-left: auto;
+        color: #39a852;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+
+    /* QUICK QUESTIONS */
+
+    .quick-help {
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+        background: #fffafd;
+    }
+
+    .quick-help p {
+        margin: 0 0 8px;
+        font-size: 13px;
+        color: #777;
+    }
+
+    .quick-buttons {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .quick-button {
+        white-space: nowrap;
+        border: 1px solid #ffc4d9;
+        background: white;
+        color: #e75480;
+        padding: 8px 13px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+        margin: 0;
+    }
+
+    .quick-button:hover {
+        background: #ffe4ee;
+    }
+
+
+    /* MESSAGES */
+
+    .messages {
+        flex: 1;
+        padding: 25px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+
+    .message {
+        margin: 15px 0;
+        padding: 13px 17px;
+        border-radius: 18px;
+        max-width: 75%;
+        line-height: 1.5;
+        word-wrap: break-word;
+    }
+
+    .bot {
+        background: #fff0f6;
+        color: #444;
+        border-bottom-left-radius: 5px;
+    }
+
+    .user {
+        background: #ffd6e7;
+        color: #444;
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+    }
+
+
+    /* TYPING */
+
+    .typing {
+        display: none;
+        background: #fff0f6;
+        width: fit-content;
+        padding: 12px 18px;
+        border-radius: 18px;
+        color: #e75480;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .typing.active {
+        display: block;
+    }
+
+
+    /* INPUT */
+
+    .input-area {
+        display: flex;
+        padding: 15px;
+        border-top: 1px solid #eee;
+        background: white;
+        gap: 10px;
+    }
+
+    input {
+        flex: 1;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    input:focus {
+        border-color: #e75480;
+        box-shadow: 0 0 5px rgba(231,84,128,0.2);
+    }
+
+    .send-button {
+        padding: 14px 22px;
+        border: none;
+        border-radius: 15px;
+        background: #e75480;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .send-button:hover {
+        background: #d94370;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+        .topbar {
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+        }
+
+        .chat {
+            width: 96%;
+            margin: 10px auto;
+            height: calc(100vh - 90px);
+        }
+
+        .message {
+            max-width: 85%;
+        }
+
+        .online {
+            display: none;
+        }
+
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+    <div class="logo">
+        🤖 HiveHelp
+    </div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
+
+</div>
+
+
+
+<!-- CHAT -->
+
+<div class="chat">
+
+
+    <!-- HEADER -->
+
+    <div class="chat-header">
+
+        <div class="header-content">
+
+            <div class="bot-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>🐝 HiveHelp</h2>
+
+                <p>
+                    Your Pink Hive assistant 💗
+                </p>
+
+            </div>
+
+            <div class="online">
+                ● Online
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- QUICK HELP -->
+
+    <div class="quick-help">
+
+        <p>
+            ✨ Quick help
+        </p>
+
+        <div class="quick-buttons">
+
+            <button
+                class="quick-button"
+                onclick="quickQuestion('How do I manage my tasks?')">
+                📋 Tasks
+            </button>
+
+            <button
+                class="quick-button"
+                onclick="quickQuestion('How do I start a meeting?')">
+                🎥 Meetings
+            </button>
+
+            <button
+                class="quick-button"
+                onclick="quickQuestion('How does team chat work?')">
+                💬 Team Chat
+            </button>
+
+            <button
+                class="quick-button"
+                onclick="quickQuestion('How can I manage my team?')">
+                👥 Team
+            </button>
+
+            <button
+                class="quick-button"
+                onclick="quickQuestion('I am stuck with a technical problem')">
+                🛠️ Technical Help
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MESSAGES -->
+
+    <div class="messages" id="messages">
+
+        <div class="message bot">
+
+            Heyyy! 👋🐝 I'm <b>HiveHelp</b>!
+
+            <br><br>
+
+            I'm here to help your team with tasks, meetings,
+            projects, chat and technical problems. 💗
+
+            <br><br>
+
+            What are you working on today? ✨
+
+        </div>
+
+
+        <div class="typing" id="typing">
+            HiveHelp is typing... 💗
+        </div>
+
+    </div>
+
+
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+        <input
+            id="userInput"
+            placeholder="Ask HiveHelp something..."
+            onkeydown="handleEnter(event)"
+        >
+
+        <button
+            class="send-button"
+            onclick="sendMessage()">
+            Send 💗
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* SEND MESSAGE */
+
+function sendMessage(customText = null) {
+
+    const input =
+        document.getElementById("userInput");
+
+    const text =
+        customText || input.value.trim();
+
+    if (!text) {
+        return;
+    }
+
+
+    const messages =
+        document.getElementById("messages");
+
+
+    /* USER MESSAGE */
+
+    const userMessage =
+        document.createElement("div");
+
+    userMessage.className =
+        "message user";
+
+    userMessage.innerText =
+        text;
+
+    messages.appendChild(userMessage);
+
+
+    input.value = "";
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    /* SHOW TYPING */
+
+    const typing =
+        document.getElementById("typing");
+
+    typing.classList.add("active");
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    /* BOT RESPONSE */
+
+    setTimeout(function() {
+
+        typing.classList.remove("active");
+
+
+        const botMessage =
+            document.createElement("div");
+
+        botMessage.className =
+            "message bot";
+
+        botMessage.innerText =
+            getResponse(text);
+
+        messages.appendChild(botMessage);
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }, 900);
+
+}
+
+
+
+/* QUICK QUESTIONS */
+
+function quickQuestion(question) {
+
+    sendMessage(question);
+
+}
+
+
+
+/* AI RESPONSE */
+
+function getResponse(text) {
+
+    text =
+        text.toLowerCase();
+
+
+    /* GREETING */
+
+    if (
+        text.includes("hello") ||
+        text.includes("hi") ||
+        text.includes("hey")
+    ) {
+
+        return "Heyyy! 🐝💗 I'm HiveHelp! What can I help you with today?";
+
+    }
+
+
+    /* TASKS */
+
+    if (
+        text.includes("task") ||
+        text.includes("todo") ||
+        text.includes("to-do")
+    ) {
+
+        return "📋 For tasks, break your work into smaller steps, assign each task to a teammate and set a deadline. You can manage everything from the Tasks section of Pink Hive! 💗";
+
+    }
+
+
+    /* PROJECT */
+
+    if (
+        text.includes("project") ||
+        text.includes("deadline")
+    ) {
+
+        return "🚀 For projects, divide the work between your Hive members, track progress and keep deadlines visible. Small tasks make big projects easier! 🐝";
+
+    }
+
+
+    /* MEETING */
+
+    if (
+        text.includes("meeting") ||
+        text.includes("call") ||
+        text.includes("camera") ||
+        text.includes("microphone") ||
+        text.includes("mic")
+    ) {
+
+        return "🎥 You can start a Hive Meeting from the Meetings section. Allow camera and microphone permissions, then use the controls to turn your camera or mic ON/OFF and share your screen.";
+
+    }
+
+
+    /* CHAT */
+
+    if (
+        text.includes("chat") ||
+        text.includes("message")
+    ) {
+
+        return "💬 Team Chat helps your Hive members communicate quickly. You can discuss tasks, share updates and keep your project conversations together.";
+
+    }
+
+
+    /* TEAM */
+
+    if (
+        text.includes("team") ||
+        text.includes("member") ||
+        text.includes("invite")
+    ) {
+
+        return "👥 A strong Hive works as a team! You can add members, divide responsibilities and communicate through Team Chat and Meetings. 🐝💗";
+
+    }
+
+
+    /* TECHNICAL PROBLEM */
+
+    if (
+        text.includes("technical") ||
+        text.includes("error") ||
+        text.includes("bug") ||
+        text.includes("problem") ||
+        text.includes("stuck") ||
+        text.includes("not working")
+    ) {
+
+        return "🛠️ Don't worry! 💗 First, check the error message, refresh the page and make sure your internet connection is working. If you're still stuck, tell me exactly what happened and I'll help you step-by-step.";
+
+    }
+
+
+    /* LOGIN */
+
+    if (
+        text.includes("login") ||
+        text.includes("log in") ||
+        text.includes("password")
+    ) {
+
+        return "🔐 If you're having trouble logging in, make sure your email and password are entered correctly. If the page doesn't open, try refreshing the website and logging in again.";
+
+    }
+
+
+    /* THANK YOU */
+
+    if (
+        text.includes("thank") ||
+        text.includes("thanks")
+    ) {
+
+        return "Awww you're welcome! 🐝💗 That's what HiveHelp is here for! ✨";
+
+    }
+
+
+    /* HELP */
+
+    if (
+        text.includes("help") ||
+        text.includes("how")
+    ) {
+
+        return "🤖 Of course! 💗 Tell me what you're trying to do. I can help with Tasks 📋, Projects 🚀, Meetings 🎥, Team Chat 💬, Team Members 👥 and technical problems 🛠️.";
+
+    }
+
+
+    /* DEFAULT */
+
+    return "I'm HiveHelp 🤖💗. I don't have an answer for that yet, but tell me a little more about your problem and I'll try to guide you step-by-step! 🐝";
+
+}
+
+
+
+/* ENTER KEY */
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        sendMessage();
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

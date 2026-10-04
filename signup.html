@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Pink Hive - Sign Up</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .signup-container {
+        width: 380px;
+        background: white;
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 42px;
+        margin-bottom: 5px;
+    }
+
+    h1 {
+        color: #e75480;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #777;
+        margin-bottom: 25px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 12px;
+        background: #e75480;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    .login-text {
+        margin-top: 25px;
+        color: #777;
+    }
+
+    .login-text a {
+        color: #e75480;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .back {
+        display: block;
+        margin-top: 20px;
+        color: #888;
+        text-decoration: none;
+        font-size: 14px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="signup-container">
+
+    <div class="logo">🐝💗</div>
+
+    <h1>Join Pink Hive!</h1>
+
+    <p class="subtitle">
+        Create your account and join the Hive ✨
+    </p>
+
+    <form onsubmit="signupUser(event)">
+
+        <input
+            type="text"
+            id="signupName"
+            placeholder="Your name"
+            required
+        >
+
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Email address"
+            required
+        >
+
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create password"
+            required
+        >
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm password"
+            required
+        >
+
+        <button type="submit">
+            Create Account 🐝
+        </button>
+
+    </form>
+
+    <p class="login-text">
+        Already have an account?
+        <a href="login.html">Login</a>
+    </p>
+
+    <a href="index.html" class="back">
+        ← Back to Pink Hive
+    </a>
+
+</div>
+
+<script>
+    function signupUser(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("signupName").value;
+
+        const email =
+            document.getElementById("signupEmail").value;
+
+        const password =
+            document.getElementById("signupPassword").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+
+            alert("Passwords do not match! 😭");
+
+            return;
+        }
+
+        alert(
+            "Welcome to Pink Hive, " +
+            name +
+            "! 🐝💗"
+        );
+
+        window.location.href = "dashboard.html";
+    }
+</script>
+```
+
+</body>
+
+</html>
